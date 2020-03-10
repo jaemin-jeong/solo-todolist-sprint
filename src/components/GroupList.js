@@ -1,12 +1,28 @@
 import React from 'react'
+import GroupListEntry from './GroupListEntry'
 
 
-const GroupList = () => {
+const GroupList = (props) => {
+  console.log(props.currentState.groupList);
+  console.log(props.currentState);
 
-  return(
+  return (
     <ul>
-    <h4>GroupList</h4>
-    <div>this is GroupList</div>
+      <div className='groupName'>
+        <h4>GroupList</h4>
+        {props.currentState.groupList.map(element => 
+          <GroupListEntry 
+          key={element.toString()} 
+          group={element} 
+          selectCurrentGroup = {props.selectCurrentGroup}
+          />
+        )}
+        {/* <div>
+        <GroupListEntry
+          key={props.currentState.group.toString()}
+          group={props.currentState.group} />
+        </div> */}
+      </div>
     </ul>
   )
 }

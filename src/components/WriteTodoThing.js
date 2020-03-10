@@ -8,7 +8,6 @@ const WriteTodoThing = (props) => {
   }
 
   function clickHandler(){
-    console.log(value)
     props.addTodoThing(value);
   }
 

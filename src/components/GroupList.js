@@ -17,6 +17,7 @@ const GroupList = (props) => {
           key={element.toString()} 
           group={element} 
           selectCurrentGroup = {props.selectCurrentGroup}
+          deleteGroup = {props.deleteGroup}
           />
         )}
         {/* <div>

@@ -10,8 +10,9 @@ const GroupListEntry = (props) => {
 
 
   return(
-      <div id = {props.group} onClick = {clickHandler}>{props.group}</div>
-
+      <div id = {props.group} onClick = {clickHandler}>{props.group}
+      <button onClick = {() => props.deleteGroup(props.group)}>del</button>
+      </div>
       //질문: ()=> 이게 여기서 정확히 어떤 역할을 하는지??
       //<div onClick = {() => props.selectCurrentGroup(props.group)}>{props.group}</div>
   )

@@ -9,7 +9,11 @@ const TodoList = (props) => {
       <div className='todoList'>
         <h4>List</h4>
         {props.currentState.todoList.map(entry =>
-          <TodoListEntry key={entry.toString()} listEntry={entry} />
+          <TodoListEntry 
+          key={entry.toString()} 
+          listEntry={entry} 
+          deleteTodoThing = {props.deleteTodoThing}
+          />
         )}
       </div>
     </ul>

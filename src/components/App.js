@@ -4,21 +4,16 @@ import GroupList from './GroupList'
 import WriteTodoThing from './WriteTodoThing'
 import TodoList from './TodoList'
 import GroupAdd from './GroupAdd'
+import PreviousTodoList from './PreviousTodoList'
 
-
-// 1. state 관리
-// 2. WriteTodoThing component에 함수 props 전달
-// 2-1. TodoList component에 상태 props 전달
-// 3. Groupadd component에 함수 props 전달
-// 3-1. GroupList component, TodoList component에 상태 props 전달
 class App extends React.Component {
   // state: todoList, groupList, darkMode,
   constructor(props) {
     super(props);
     this.state = {
       todoList: [],
-      groupList: [],
-      currentGroup: '',
+      groupList: ['그룹 미지정'],
+      currentGroup: '그룹 미지정',
       darkMode: 'false',
     }
     this.saveArr = [];
@@ -29,9 +24,11 @@ class App extends React.Component {
     this.addTodoThing = this.addTodoThing.bind(this);
     this.addGroup = this.addGroup.bind(this);
     this.selectCurrentGroup = this.selectCurrentGroup.bind(this);
+    this.deleteGroup = this.deleteGroup.bind(this);
+    this.deleteTodoThing = this.deleteTodoThing.bind(this);
   }
 
-  //CreateNew를 클릭하면 실행되는 함수
+  //새로운 todo list 만들기
   init() {
     this.save[this.state.currentGroup] = this.state.todoList;
     this.saveArr.push(JSON.stringify(this.save));
@@ -50,7 +47,14 @@ class App extends React.Component {
     })
   }
 
-  //그룹 추가할 때 사용할 거
+  //todoThing 삭제
+  deleteTodoThing(target) {
+    this.setState({
+      todoList: this.state.todoList.filter(thing => thing !== target),
+    })
+  }
+
+  //그룹 추가
   addGroup(groupName) {
     this.setState({
       //groupList: this.state.groupList.push(groupName) <-- 이렇게 하면 안됨
@@ -60,7 +64,7 @@ class App extends React.Component {
     })
   }
 
-  //그룹 선택하는 거
+  //현재 그룹 선택
   selectCurrentGroup(selectedGroup) {
     this.setState({
       currentGroup: selectedGroup,
@@ -68,8 +72,16 @@ class App extends React.Component {
     console.log('선택된 그룹은 : ', selectedGroup)
   }
 
+  //그룹 삭제
+  deleteGroup(target) {
+    this.setState({
+      groupList: this.state.groupList.filter(group => group !== target),
+    })
+  }
 
-  componentDidMount(){
+
+
+  componentDidMount() {
     console.log('----------------------------------')
     console.log('componentDidMount 했습니다~')
     console.log('this.save는 ', this.save)
@@ -77,7 +89,7 @@ class App extends React.Component {
     console.log('----------------------------------')
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     console.log('----------------------------------')
     console.log('componentDidUpdate 했습니다!')
     console.log('this.save는 ', this.save)
@@ -89,10 +101,15 @@ class App extends React.Component {
     return (
       <div>
         <CreateNew init={this.init} />
-        <TodoList currentState={this.state} />
+        <TodoList 
+        currentState={this.state} 
+        deleteTodoThing = {this.deleteTodoThing}  
+        />
+        <PreviousTodoList />
         <GroupList
           currentState={this.state}
           selectCurrentGroup={this.selectCurrentGroup}
+          deleteGroup={this.deleteGroup}
         />
         <GroupAdd addGroup={this.addGroup} />
         <WriteTodoThing

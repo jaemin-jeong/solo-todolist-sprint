@@ -17,24 +17,23 @@ class App extends React.Component {
     super(props);
     this.state = {
       todoList: [],
-      groupList: ['그룹 미지정'],
+      groupList: [],
       currentGroup: '',
       darkMode: 'false',
     }
     this.saveArr = [];
     this.save = {
-    //그룹명을 key로, todoList배열을 value로
+      //그룹명을 key로, todoList배열을 value로
     };
     this.init = this.init.bind(this);
     this.addTodoThing = this.addTodoThing.bind(this);
     this.addGroup = this.addGroup.bind(this);
-    this.showTodoList = this.showTodoList.bind(this);
     this.selectCurrentGroup = this.selectCurrentGroup.bind(this);
   }
 
   //CreateNew를 클릭하면 실행되는 함수
-  init(){
-    this.save[this.state.group] = this.state.todoList;
+  init() {
+    this.save[this.state.currentGroup] = this.state.todoList;
     this.saveArr.push(JSON.stringify(this.save));
     this.setState({
       todoList: [],
@@ -43,55 +42,63 @@ class App extends React.Component {
     console.log('save : ', this.save);
   }
 
-  //할 일 추가할때 사용할 거
-  addTodoThing(addThing){
+
+  addTodoThing(addThing) {
+    console.log('받은 addThing은 : ', addThing);
     this.setState({
-      todoList: this.state.todoList.push(addThing),
-    })    
-    this.showTodoList();
+      todoList: this.state.todoList.concat(addThing),
+    })
   }
 
   //그룹 추가할 때 사용할 거
-  addGroup(groupName){
+  addGroup(groupName) {
     this.setState({
-      groupList: this.state.groupList.push(groupName),
-      //group : groupName
+      //groupList: this.state.groupList.push(groupName) <-- 이렇게 하면 안됨
+      //push를 하면 state값을 직접적으로 바꿔주는게 되어버리기 때문에, immutable한 메소드를 사용해야됨.
+      //참고: https://blog.naver.com/PostView.nhn?blogId=backsajang420&logNo=221353506054&redirect=Dlog&widgetTypeCall=true&directAccess=false
+      groupList: this.state.groupList.concat(groupName),
     })
-    //이걸 안하면 에러 발생. 흐름이 정확히 어떻게 되는건지?
-    this.showTodoList();
   }
 
-  //현재 그룹 선택하는 거
-  selectCurrentGroup(selectedGroup){
+  //그룹 선택하는 거
+  selectCurrentGroup(selectedGroup) {
     this.setState({
-      currentGroup : selectedGroup,
+      currentGroup: selectedGroup,
     })
     console.log('선택된 그룹은 : ', selectedGroup)
   }
 
-  //todoList에 전달할 거... 배열은 이거 해줘야되고, 배열 아닌건 안해줘도됨..??????????
-  showTodoList(){
-    this.setState({
-      todoList: this.state.todoList,
-      groupList: this.state.groupList,
-      currentGroup : this.state.currentState,
-      darkMode: this.state.darkMode,
-    })
-    //console.log(this.state)
+
+  componentDidMount(){
+    console.log('----------------------------------')
+    console.log('componentDidMount 했습니다~')
+    console.log('this.save는 ', this.save)
+    console.log('this.saveArr는 ', this.saveArr)
+    console.log('----------------------------------')
   }
-  
+
+  componentDidUpdate(){
+    console.log('----------------------------------')
+    console.log('componentDidUpdate 했습니다!')
+    console.log('this.save는 ', this.save)
+    console.log('this.saveArr는 ', this.saveArr)
+    console.log('----------------------------------')
+  }
 
   render() {
     return (
       <div>
-        <CreateNew init = {this.init}/>
-        <TodoList currentState = {this.state}/>
-        <GroupList 
-        currentState = {this.state}
-        selectCurrentGroup = {this.selectCurrentGroup}
+        <CreateNew init={this.init} />
+        <TodoList currentState={this.state} />
+        <GroupList
+          currentState={this.state}
+          selectCurrentGroup={this.selectCurrentGroup}
         />
-        <GroupAdd addGroup = {this.addGroup}/>
-        <WriteTodoThing addTodoThing = {this.addTodoThing}/>
+        <GroupAdd addGroup={this.addGroup} />
+        <WriteTodoThing
+          addTodoThing={this.addTodoThing}
+          currentState={this.state}
+        />
       </div>
     )
   }

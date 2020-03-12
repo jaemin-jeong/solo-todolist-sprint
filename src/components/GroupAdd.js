@@ -9,7 +9,7 @@ const GroupAdd = (props) => {
   }
 
   function clickHandler(){
-    console.log('groupName은', groupName);
+    //console.log('groupName은', groupName);
     props.addGroup(groupName);
   }
 

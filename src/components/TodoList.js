@@ -2,6 +2,7 @@ import React from 'react'
 import TodoListEntry from './TodoListEntry'
 
 const TodoList = (props) => {
+  //console.log(props.currentState);
 
   return (
     <ul>

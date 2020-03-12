@@ -5,7 +5,7 @@ const TodoListEntry = (props) => {
   return(
     <div>
     <input type="checkbox" id = {props.listEntry} value = {props.listEntry}></input>
-    <label for = {props.listEntry}>{props.listEntry}</label>
+    <label id = {props.listEntry}>{props.listEntry}</label>
     </div>
   )
 }

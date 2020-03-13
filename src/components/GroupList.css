@@ -1,0 +1,17 @@
+.currentGroup{
+  height: 40px;
+  margin-top: 20px;
+}
+
+.groupList{
+  margin-top: 20px;
+}
+
+.groupListEntry{
+  height: 80px;
+  overflow: scroll;
+}
+
+.asideTitle{
+  font-weight: 800;
+}

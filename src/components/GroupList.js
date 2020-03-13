@@ -1,5 +1,6 @@
 import React from 'react'
 import GroupListEntry from './GroupListEntry'
+import './GroupList.css'
 
 
 const GroupList = (props) => {
@@ -8,24 +9,28 @@ const GroupList = (props) => {
 
   return (
     <ul>
-      <div className='groupName'>
-        <h4>Current Group</h4>
+      <div className='currentGroup'>
+        <div className='asideTitle'>Current Group</div>
         <div>{props.currentState.currentGroup}</div>
-        <h4>GroupList</h4>
-        {props.currentState.groupList.map(element =>
-          <GroupListEntry 
-          key={element.toString()} 
-          group={element} 
-          selectCurrentGroup = {props.selectCurrentGroup}
-          deleteGroup = {props.deleteGroup}
-          />
-        )}
-        {/* <div>
+      </div>
+      <div className='groupList'>
+        <div className='asideTitle'>GroupList</div>
+        <div className='groupListEntry'>
+          {props.currentState.groupList.map(element =>
+            <GroupListEntry
+              key={element.toString()}
+              group={element}
+              selectCurrentGroup={props.selectCurrentGroup}
+              deleteGroup={props.deleteGroup}
+            />
+          )}
+        </div>
+      </div>
+      {/* <div>
         <GroupListEntry
           key={props.currentState.group.toString()}
           group={props.currentState.group} />
         </div> */}
-      </div>
     </ul>
   )
 }

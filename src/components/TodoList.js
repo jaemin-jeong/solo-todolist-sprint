@@ -1,22 +1,27 @@
 import React from 'react'
 import TodoListEntry from './TodoListEntry'
+import './TodoList.css'
 
 const TodoList = (props) => {
   //console.log(props.currentState);
 
   return (
-    <ul>
-      <div className='todoList'>
-        <h4>List</h4>
+    <div>
+      <main className='todoList'>
+        <div className = 'title'>List</div>
+        <div className = 'todos-wrapper'>
         {props.currentState.todoList.map(entry =>
           <TodoListEntry 
           key={entry.toString()} 
-          listEntry={entry} 
+          listEntry={entry}
+          //ID
+          listEntryId = {props.currentState.ID}
           deleteTodoThing = {props.deleteTodoThing}
           />
         )}
-      </div>
-    </ul>
+        </div>
+      </main>
+    </div>
   )
 }
 

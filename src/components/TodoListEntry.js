@@ -6,7 +6,7 @@ const TodoListEntry = (props) => {
     <div>
     <input type="checkbox" id = {props.listEntry} value = {props.listEntry}></input>
     <label id = {props.listEntry}>{props.listEntry}</label>
-    <button onClick = {() => props.deleteTodoThing(props.listEntry)}>del</button>
+    <button className = 'button1' onClick = {() => props.deleteTodoThing(props.listEntry, props.listEntryId)}>del</button>
     </div>
   )
 }

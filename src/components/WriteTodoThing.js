@@ -1,4 +1,5 @@
 import React from 'react'
+import './WriteTodoThing.css'
 
 const WriteTodoThing = (props) => {
 
@@ -12,11 +13,10 @@ const WriteTodoThing = (props) => {
   }
 
   return(
-    <ul>
-    <h4>Add todo Thing</h4>
+    <div className = 'form'>
     <input className = 'inputTodoThing' type = 'text' onChange = {changeHandler}></input>
     <button className = 'button1' onClick = {clickHandler}>add</button>
-    </ul>
+    </div>
   )
 }
 

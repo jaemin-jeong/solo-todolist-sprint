@@ -9,14 +9,13 @@ const GroupAdd = (props) => {
   }
 
   function clickHandler(){
-    //console.log('groupName은', groupName);
     props.addGroup(groupName);
   }
 
   return(
     <ul>
-      <input type = 'text' className = 'GroupName' onChange = {changeHandler}></input>
-      <button className = 'button2' onClick = {clickHandler}>add</button>
+      <input className = 'input2' type = 'text' className = 'GroupName' onChange = {changeHandler}></input>
+      <button className = 'button1' onClick = {clickHandler}>add</button>
     </ul>
   )
 }

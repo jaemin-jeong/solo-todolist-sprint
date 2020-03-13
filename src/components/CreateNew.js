@@ -2,11 +2,10 @@ import React from 'react';
 
 const CreateNew = (props) => {
 
-
   return (
     <ul>
-      <h4>Create New TODO LIST</h4>
-        <button onClick={props.init}>create</button>
+      <div className = 'asideTitle'>Create New TODO LIST</div>
+        <button className = 'button1' onClick={props.init}>create</button>
     </ul>
   )
 }
